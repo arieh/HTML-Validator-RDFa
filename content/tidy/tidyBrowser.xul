@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!-- *************************************************************************
+  HTML Validator
+
+  File: tidyBrowser.xul
+  Description: contains the xul overlay for the status bar of the browser.
+  Author : Marc Gueury
+  Licence : see licence.txt
+************************************************************************** -->
+
+<!DOCTYPE window SYSTEM "chrome://tidy/locale/tidy.dtd" >
+
+<overlay id="browserStatusBarID"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/x-javascript" src="chrome://tidy/content/tidyInstall.js" />
+<script type="application/x-javascript" src="chrome://tidy/content/tidyUtil.js" />
+<script type="application/x-javascript" src="chrome://tidy/content/tidyBrowser.js" />
+<script type="application/x-javascript" src="chrome://tidy/content/tidyThread.js" />
+
+<keyset id="mainKeyset">
+  <key id="key_copy_error_clipboard" key="E" oncommand="onTidyBrowserCopyErrorToClipboard();" modifiers="accel,shift"/>
+  <key id="key_innerHTML" key="A" oncommand="oTidyBrowser.onViewSource(event);" modifiers="accel,shift"/>
+</keyset>
+
+<stringbundleset id="stringbundleset">
+  <stringbundle id="tidy.string.bundle" src="chrome://tidy/locale/tidy.properties"/>
+</stringbundleset>
+  
+  
+  <menupopup id="toolsPopup">
+    <menuitem id="tidy.browser.toolsmenu"  position="5" label="&tidy.browser.toolsmenu;" oncommand="oTidyBrowser.onOptions()"/>
+  </menupopup>
+
+  <!-- Firefox -->
+  <menupopup id="menu_ToolsPopup">
+    <menuitem id="tidy.browser.toolsmenu2" oncommand="oTidyBrowser.onOptions()" 
+    insertafter="javascriptConsole,devToolsSeparator" label="&tidy.browser.toolsmenu;"/>
+  </menupopup>
+
+  <statusbar id="status-bar">
+    <statusbarpanel id="tidy-statusbar-panel" 
+       insertafter="statusbarpanel-updates"
+       collapsed="false"
+       persist="collapsed">
+
+      <popup id="tidy.browser.menu">
+        <menuitem label="&tidy.browser.menu.option;" oncommand="oTidyBrowser.onOptions()"/>
+        <menu id="tidy.browser.menu.show" label="&tidy.browser.menu.show;">
+          <menupopup>
+            <menuitem label="&tidy.options.icon_text;" id="tidy.browser.menu.icon_text" type="radio" oncommand="oTidyBrowser.onIcon('icon_text')"/>
+            <menuitem label="&tidy.options.icon_only;" id="tidy.browser.menu.icon_only" type="radio" oncommand="oTidyBrowser.onIcon('icon_only')"/>
+          </menupopup>
+        </menu> 
+        <menuseparator/>
+        <menuitem label="&tidy.browser.menu.disable;" id="tidy.browser.menu.disable" oncommand="oTidyBrowser.onDisable()"/>
+        <menuitem label="..." id="tidy.browser.menu.disable_site" oncommand="oTidyBrowser.onDisableSite()"/>
+        <menuseparator/>
+        <menu id="tidy.browser.menu.advanced" label="&tidy.browser.menu.advanced;">
+          <menupopup>
+            <menuitem id="tidy.browser.menu.online.html" label="&tidy.browser.menu.online.html;" oncommand="oTidyBrowser.onViewSource(event)"/> 
+            <menuitem id="tidy.browser.menu.online.css" label="&tidy.browser.menu.online.css;" oncommand="oTidyBrowser.onViewSource(event)"/> 
+            <menuseparator/>
+            <menuitem id="tidy.browser.menu.innerHTML" label="&tidy.browser.menu.innerHTML;" oncommand="oTidyBrowser.onViewSource(event)" key="key_innerHTML"/> 
+            <!--
+            <menuseparator/>
+            <menuitem label="Links validation..." oncommand="oTidyBrowser.onLinks()"/>
+            -->
+            <menuseparator/>
+            <menuitem label="&tidy.browser.menu.error_clipboard;" oncommand="onTidyBrowserCopyErrorToClipboard()" key="key_copy_error_clipboard"/>
+            <menuitem id="tidy.browser.menu.html_clipboard" label="&tidy.browser.menu.html_clipboard;" oncommand="onTidyBrowserCopyHtmlToClipboard()"/> 
+          </menupopup>
+        </menu> 
+        <menuitem id="tidy.browser.menu.cleanup" label="&tidy.browser.menu.cleanup;" oncommand="oTidyBrowser.onViewSource(event)"/>
+        <menuitem id="tidy.browser.menu.view_source" label="&tidy.browser.menu.view_source;" oncommand="oTidyBrowser.onViewSource(event)"/>
+        <menuitem label="&tidy.browser.menu.about;" oncommand="oTidyBrowser.onAbout()"/>
+        <!--
+          <menuitem label="Test Thread" oncommand="TestThread()"/>
+          <menuitem label="Test Links" oncommand="TestLinks()"/>
+          <menuitem label="Test Sp" oncommand="TestSp()"/>
+          <menuitem label="TestQueue" oncommand="TestQueue()"/>
+        -->
+        
+      </popup>
+
+      <popupset id="tidy-dummy-popup">
+      </popupset>
+
+      <hbox id="tidy-status-bar-hbox" onmouseover="oTidyBrowser.addTooltip()">
+        <vbox flex="1" pack="center">
+          <image
+            id="tidy-status-bar-img"
+            src="chrome://tidy/skin/good.png" 
+            style="width:16px ; height:16px;"
+			context="tidy.browser.menu"
+			mousethrough="never"
+            ondblclick="oTidyBrowser.onViewSource(event)"
+            onclick="onTidyBrowserClicked(event)"
+          />
+        </vbox>
+        <label control="tidy-browser-error" 
+          id="tidy-browser-error" 
+          context="tidy.browser.menu"
+          ondblclick="oTidyBrowser.onViewSource(event)"
+          value="- / -"/>
+      </hbox>  
+    </statusbarpanel>
+  </statusbar>
+</overlay>
