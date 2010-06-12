@@ -5,12 +5,12 @@
 
   <Description about="urn:mozilla:install-manifest">
     <em:id>{3b56bcc7-54e5-44a2-9b44-66c3ef58c13e}</em:id>
-    <em:version>0.8.6.1</em:version>
+    <em:version>0.8.6.1+RDFa</em:version>
     <em:type>2</em:type>
 
-    <em:name>Html Validator</em:name>
-    <em:description>Adds HTML validation to the View Page Source of the browser. The validation is done by Tidy or a SGML Parser from W3c.</em:description>
-    <em:creator>Marc Gueury</em:creator>
+    <em:name>Html Validator - RDFa</em:name>
+    <em:description>Adds HTML validation to the View Page Source of the browser. The validation is done by Tidy or a SGML Parser from W3c. This Version Supports RDFa with the SGML Parser</em:description>
+    <em:creator>Marc Gueury (Arieh Glazer for RDFa support)</em:creator>
     <em:homepageURL>http://users.skynet.be/mgueury/mozilla/</em:homepageURL>
     <em:iconURL>chrome://tidy/skin/html.png</em:iconURL>
     <em:optionsURL>chrome://tidy/content/tidyOptions.xul</em:optionsURL>

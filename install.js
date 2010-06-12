@@ -1,8 +1,8 @@
 // constants which may be translated
 
-const X_MSG =      "Install Html Validator";
+const X_MSG =      "Install Html Validator + RDFa";
 const X_LOCALE1 =  "locale/en-US/tidy/";
-const X_INSTMSG1 = "HTML Validator, version"
+const X_INSTMSG1 = "HTML Validator + RDFa, version"
 const X_INSTMSG2 = "is now installed.\n\nPlease restart mozilla."
 const X_ERR202_1 = "You need to have write permissions to the chrome directory and subfolders:"
 const X_ERR202_2 = "and to the components directory:"
